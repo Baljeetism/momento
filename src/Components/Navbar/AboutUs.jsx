@@ -29,29 +29,23 @@ export default function AboutUs() {
 
         margin: "0 auto",
         color: "#black",
-        mt: 3,
+        mt: 15,
         position: "relative",
         textAlign: "center",
         fontSize: "4rem",
-        fontWeight: "600"
-      }}>About MOMENTO</Typography>
-      <Typography sx={{
+        fontWeight: "600",
+        fontFamily: "Outfit, sans-serif"
+        
 
-        margin: "0 auto",
-        color: "#6d6875",
-        mt: 1,
-        position: "relative",
-        textAlign: "center",
-        fontSize: "1rem",
-        fontWeight: "600"
-      }}>" Turning Moments Into Milestones. "</Typography>
+      }}>About MOMENTO</Typography>
+      
       <Box
         sx={{
-          width: "100%",
-          maxWidth: "800px",
+          width: "100vw",  // Full viewport width
           height: "400px",
           margin: "0 auto",
-          mt: 4
+          mt: 4,
+          
         }}
       >
 
@@ -65,7 +59,7 @@ export default function AboutUs() {
             src={images[0].url}
             alt={images[0].caption}
             style={{
-              width: "800px",
+              width: "1500px",
               height: "400px",
               objectFit: "cover",
               borderRadius: "10px",
@@ -102,9 +96,9 @@ export default function AboutUs() {
           We are a passionate team of event enthusiasts, tech innovators, and design thinkers dedicated to creating seamless experiences. We understand that planning events can be overwhelming, so we built a platform that handles the heavy lifting, leaving you more time to focus on what truly matters — making memories.
         </Typography>
 
-        
 
-        
+
+
 
         <Typography variant="h6" fontStyle="italic" sx={{ mt: 3 }}>
           Ready to make your next event a hit? Get started with <strong>Momento</strong> today!

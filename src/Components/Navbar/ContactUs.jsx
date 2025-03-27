@@ -29,17 +29,18 @@ export default function ContactUs() {
 
                 margin: "0 auto",
                 color: "#black",
-                mt: 3,
+                mt: 15,
                 position: "relative",
                 textAlign: "center",
                 fontSize: "4rem",
-                fontWeight: "600"
+                fontWeight: "600",
+                fontFamily: "Outfit, sans-serif"
             }}>Contact Us</Typography>
 
             <Box
                 sx={{
                     width: "100%",
-                    maxWidth: "800px",
+                    maxWidth: "1500px",
                     height: "400px",
                     margin: "0 auto",
                     mt: 4
@@ -56,7 +57,7 @@ export default function ContactUs() {
                         src={images[0].url}
                         alt={images[0].caption}
                         style={{
-                            width: "800px",
+                            width: "1500px",
                             height: "400px",
                             objectFit: "cover",
                             borderRadius: "10px",

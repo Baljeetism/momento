@@ -18,6 +18,7 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Navbar/Footer";
 import axiosInstance from "../../axiosInstance";
 import Swal from "sweetalert2";
+import API_ENDPOINTS from "../../api";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -43,8 +44,8 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axiosInstance.post("auth/login/", credentials);
-      console.log("Response:", res.data);
+      const res = await axiosInstance.post(API_ENDPOINTS.LOGIN, credentials);
+      // console.log("Response:", res.data.data);
       
       localStorage.setItem("access_token", res.data.access);
       localStorage.setItem("refresh_token", res.data.refresh);
@@ -83,7 +84,7 @@ export default function Login() {
             xs={12}
             md={6}
             sx={{
-              backgroundColor: "#979dac",
+              backgroundColor: "#f8f9fa",
               color: "#00171f",
               display: "flex",
               flexDirection: "column",
@@ -96,8 +97,8 @@ export default function Login() {
             <Typography variant="h3" sx={{ fontWeight: "bold" , fontSize: "5rem"}}>
               Momento
             </Typography>
-            <Typography variant="h6" sx={{ mt: 2, fontStyle: "italic" }}>
-              "Turning Moments Into Milestones.."
+            <Typography variant="h6" sx={{ mt: 2, fontStyle: "italic" ,color: "#3A0CA3" ,fontFamily: "Outfit, sans-serif" }}>
+              "Every great event begins with a single login"
             </Typography>
           </Grid>
 
@@ -106,7 +107,7 @@ export default function Login() {
             xs={12}
             md={6}
             sx={{
-              backgroundColor: "#979dac",
+              backgroundColor: "#f8f9fa",
               color: "#fff",
               display: "flex",
               flexDirection: "column",

@@ -6,6 +6,7 @@ import axiosInstance from "../../axiosInstance";
 import { TextField, Button, Checkbox, FormControlLabel, Container, Typography, Card, Box } from "@mui/material";
 // import Alert from '@mui/material/Alert';
 import Swal from 'sweetalert2'
+import API_ENDPOINTS from "../../api";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -30,7 +31,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post("/auth/users/", formData);
+      const response = await axiosInstance.post(API_ENDPOINTS.SIGNUP, formData);
       // alert(`Registration successful, ${formData.first_name}! Please login.`);
       Swal.fire({
         title: "Good job!",
@@ -69,7 +70,7 @@ export default function Signup() {
   return (
     <>
       <Navbar />
-      <Container maxWidth="sm" sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", backgroundColor: "#979dac" }}>
+      <Container maxWidth="sm" sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", backgroundColor: "#f8f9fa" }}>
         <Card sx={{ p: 4, boxShadow: 5, borderRadius: 2, width: "100%" }}>
           <Typography variant="h4" align="center" gutterBottom>
           Create a new account

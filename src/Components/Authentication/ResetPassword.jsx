@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { TextField, Button, Container, Typography, Card } from '@mui/material';
 // import Alert from '@mui/material/Alert';
 import Swal from 'sweetalert2'
+import API_ENDPOINTS from "../../api";
 
 export default function ResetPassword() {
     const [newPassword, setNewPassword] = useState('');
@@ -26,7 +27,7 @@ export default function ResetPassword() {
         }
 
         try {
-            await axios.post('http://localhost:8000/api/auth/users/reset_password_confirm/', {
+            await axios.post(API_ENDPOINTS.RESET_CONFIRM, {
                 uid,
                 token,
                 new_password: newPassword,
@@ -43,7 +44,7 @@ export default function ResetPassword() {
             navigate('/login');
         } catch (err) {
             console.error('Error:', err);
-            console.log(err.response?.data);
+            console.log(err.response.data);
             // <Alert severity="error">Failed to reset password!</Alert>
             Swal.fire({
                 
@@ -55,7 +56,7 @@ export default function ResetPassword() {
     };
 
     return (
-        <Container maxWidth="sm" sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", backgroundColor: "#979dac" }}>
+        <Container maxWidth="sm" sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", backgroundColor: "#f8f9fa" }}>
             <Card sx={{ p: 4, boxShadow: 3, borderRadius: 2, width: "100%" }}>
                 <Typography variant="h4" align="center" gutterBottom>
                     Set New Password

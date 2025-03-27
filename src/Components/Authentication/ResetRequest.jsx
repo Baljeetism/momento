@@ -6,6 +6,7 @@ import Navbar from '../Navbar/Navbar';
 import Swal from 'sweetalert2'
 
 import { TextField, Button, Box, Typography, Container, Paper } from '@mui/material';
+import API_ENDPOINTS from '../../api';
 
 export default function ResetRequest() {
   const [email, setEmail] = useState('');
@@ -14,7 +15,7 @@ export default function ResetRequest() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/api/auth/users/reset_password/', { email });
+      await axios.post(API_ENDPOINTS.RESET_REQUEST, { email });
       // alert('Password reset link sent to your email!');
       // <Alert severity="success">Password reset link sent to your email!</Alert>
       Swal.fire({
