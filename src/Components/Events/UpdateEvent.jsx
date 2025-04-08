@@ -56,7 +56,7 @@ const UpdateEvent = () => {
           artist_short_description: eventData.artist_short_description,
           image: null, 
           image_artist: null, 
-          capacity: "",
+          capacity: eventData.capacity,
         });
         
         setOriginalImage(eventData.image);
@@ -79,7 +79,10 @@ const UpdateEvent = () => {
     });
   };
 
-  const handleNext = () => setActiveStep((prev) => prev + 1);
+  const handleNext = (e) => {
+    e.preventDefault();
+    setActiveStep((prev) => prev + 1);
+  }
   const handleBack = () => setActiveStep((prev) => prev - 1);
 
   const handleSubmit = async (e) => {
@@ -184,12 +187,14 @@ const UpdateEvent = () => {
           </Stepper>
           <form onSubmit={handleSubmit} encType="multipart/form-data">
             {renderStepContent(activeStep)}
+            
             <Box sx={{ mt: 2, display: "flex", justifyContent: "space-between" }}>
-              <Button disabled={activeStep === 0} onClick={handleBack}>Back</Button>
+              <Button type="button" disabled={activeStep === 0} onClick={handleBack}>Back</Button>
+              
               {activeStep === steps.length - 1 ? (
                 <Button type="submit" variant="contained" color="primary">Update Event</Button>
               ) : (
-                <Button variant="contained" color="primary" onClick={handleNext}>Next</Button>
+                <Button type="button" variant="contained" color="primary" onClick={handleNext}>Next</Button>
               )}
             </Box>
           </form>

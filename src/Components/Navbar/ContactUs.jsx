@@ -5,13 +5,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Box, Typography,Link } from "@mui/material";
 import { Phone, Email, LocationOn } from "@mui/icons-material";
+import { contactUs } from '../../Utils/ImageData';
 
-const images = [
-    { url: "https://images.unsplash.com/photo-1534536281715-e28d76689b4d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", caption: "CONTACT US" }
-];
+
 
 export default function ContactUs() {
 
+    const image=contactUs[0].url;
     const settings = {
         dots: true,
         infinite: false,
@@ -54,8 +54,8 @@ export default function ContactUs() {
                     }}
                 >
                     <img
-                        src={images[0].url}
-                        alt={images[0].caption}
+                        src={image}
+                        
                         style={{
                             width: "1500px",
                             height: "400px",

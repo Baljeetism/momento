@@ -1,0 +1,49 @@
+.reviews-slider {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.reviews-track {
+    display: flex;
+    gap: 16px;
+    animation: scroll 170s linear infinite; /* Continuous sliding animation */
+}
+
+.review-card {
+    font-family: 'Outfit, sans-serif';
+    font-size: 100px;
+    flex: 0 0 auto;
+    min-width: 300px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, 
+    background 0.3s ease-in-out;
+}
+
+.review-card:hover {
+    transform: scale(1.05);
+    /* box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); */
+    background: #f9f9f9;
+    color: #f9f9f9;
+}
+
+
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Stops animation when hovered */
+.reviews-slider:hover .reviews-track {
+    animation-play-state: paused;
+}

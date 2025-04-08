@@ -46,6 +46,7 @@ export default function Footer() {
           </Link>
           |
           <Link
+          
             sx={{
               color: "#edf2fb",
               fontFamily: "Poppins",

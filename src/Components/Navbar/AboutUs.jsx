@@ -4,13 +4,15 @@ import Footer from './Footer'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Box, Typography } from "@mui/material";
+import PostReview from '../Review/PostReview';
+import { aboutUs } from '../../Utils/ImageData';
 
 
-const images = [
-  { url: "https://images.unsplash.com/photo-1563906267088-b029e7101114?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
-];
+
 
 export default function AboutUs() {
+  const image = aboutUs[0].url;
+
   const settings = {
     dots: true,
     infinite: false,
@@ -35,17 +37,17 @@ export default function AboutUs() {
         fontSize: "4rem",
         fontWeight: "600",
         fontFamily: "Outfit, sans-serif"
-        
+
 
       }}>About MOMENTO</Typography>
-      
+
       <Box
         sx={{
           width: "100vw",  // Full viewport width
           height: "400px",
           margin: "0 auto",
           mt: 4,
-          
+
         }}
       >
 
@@ -56,8 +58,8 @@ export default function AboutUs() {
           }}
         >
           <img
-            src={images[0].url}
-            alt={images[0].caption}
+            src={image}
+    
             style={{
               width: "1500px",
               height: "400px",
@@ -103,6 +105,10 @@ export default function AboutUs() {
         <Typography variant="h6" fontStyle="italic" sx={{ mt: 3 }}>
           Ready to make your next event a hit? Get started with <strong>Momento</strong> today!
         </Typography>
+        <Typography variant="h4" fontWeight="600" gutterBottom sx={{mt:5}}>
+          Share Your Feedback With Us
+        </Typography>
+        <PostReview />
       </Box>
 
       <Footer />

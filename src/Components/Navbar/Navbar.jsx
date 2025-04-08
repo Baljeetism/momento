@@ -4,6 +4,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link, useNavigate, useLocation } from "react-router-dom"; // Import useLocation
 import Swal from "sweetalert2";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { isSuperUser } from "../../Utils/auth";
+import { isAdminOnly } from "../../Utils/IsAdminOnly";
 
 
 const navItems = [
@@ -13,14 +15,26 @@ const navItems = [
 ];
 
 function Navbar({ handleDrawerToggle, mobileOpen }) {
+
   const navigate = useNavigate();
   const location = useLocation(); // Get current route
   const [anchorEl, setAnchorEl] = useState(null);
   const [registeredEvents, setRegisteredEvents] = useState([]);
+  const [superuser, setSuperUser] = useState();
+  const [adminuser, setAdminUser] = useState();
 
   useEffect(() => {
     const events = JSON.parse(localStorage.getItem("registered_events")) || [];
     setRegisteredEvents(events);
+    const checkAdmin = async () => {
+      const adminStatus = await isSuperUser();
+      setSuperUser(adminStatus);
+      // console.log(adminStatus);
+      const Status = await isAdminOnly();
+      setAdminUser(Status);
+
+    };
+    checkAdmin();
   }, []);
 
   const handleLogout = () => {
@@ -44,7 +58,7 @@ function Navbar({ handleDrawerToggle, mobileOpen }) {
             to="/"
             sx={{
               textDecoration: "none",
-              color: "#04080f", 
+              color: "#04080f",
               fontFamily: "Alfa Slab One, serif",
               fontWeight: 400,
               fontSize: "2rem",
@@ -88,8 +102,12 @@ function Navbar({ handleDrawerToggle, mobileOpen }) {
                     </MenuItem>
                   ))
                 ) : (
-                  <MenuItem disabled>No Registered Events</MenuItem>
+                  <MenuItem component={Link} to="/uevents">Registered Events</MenuItem>
                 )}
+
+                <MenuItem disabled={!superuser} component={Link} to="/guests">Guest list</MenuItem>
+                <MenuItem disabled={!adminuser} component={Link} to="/eventspu">Dashboard</MenuItem>
+
                 <MenuItem onClick={handleLogout} sx={{ color: "red" }}>
                   Logout
                 </MenuItem>

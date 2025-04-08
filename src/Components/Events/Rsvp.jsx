@@ -1,79 +1,85 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // Import useParams
-import { Button, Menu, MenuItem, Chip, Box } from '@mui/material';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Container, Typography, Card, CardContent, CircularProgress, Alert } from "@mui/material";
+import API_ENDPOINTS from "../../api";
 
-const RSVPButton = () => {
-  const { eventId } = useParams(); // Get event ID from URL
-  const [status, setStatus] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+const API_URL = API_ENDPOINTS.RSVP;  // Update if needed
 
-  useEffect(() => {
-    const fetchRSVPStatus = async () => {
-      try {
-        const response = await axios.get(`/api/events/${eventId}/`);
-        setStatus(response.data.rsvp_status);
-      } catch (error) {
-        console.error("Error fetching RSVP status:", error);
-      }
-    };
-    if (eventId) {
-      fetchRSVPStatus();
-    }
-  }, [eventId]);
+const AttendingEvents = () => {
+    const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  const handleRSVP = async (newStatus) => {
-    setLoading(true);
-    setAnchorEl(null);
-    try {
-      await axios.post('/api/rsvps/', {
-        event: eventId,
-        status: newStatus
-      });
-      setStatus(newStatus);
-    } catch (error) {
-      console.error("Error updating RSVP:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    useEffect(() => {
+        const fetchAttendingEvents = async () => {
+            try {
+                const token = localStorage.getItem("access");  // Fetch token from storage
+                if (!token) {
+                    setError("You need to be logged in to view your events.");
+                    setLoading(false);
+                    return;
+                }
 
-  const buttonText = () => {
-    if (loading) return "Loading...";
-    if (!status) return "RSVP";
-    return `RSVP: ${status.charAt(0).toUpperCase() + status.slice(1)}`;
-  };
+                const response = await axios.get(API_URL, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,  // Pass JWT token for authentication
+                    },
+                });
 
-  return (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={(e) => setAnchorEl(e.currentTarget)}
-        disabled={loading}
-      >
-        {buttonText()}
-      </Button>
+                setEvents(response.data.results);
+            } catch (err) {
+                setError("Failed to fetch events. Please try again later.");
+                console.error("Error fetching attending events:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={() => setAnchorEl(null)}
-      >
-        <MenuItem onClick={() => handleRSVP('attending')}>Attending</MenuItem>
-        <MenuItem onClick={() => handleRSVP('maybe')}>Maybe</MenuItem>
-        <MenuItem onClick={() => handleRSVP('not_attending')}>Not Attending</MenuItem>
-      </Menu>
+        fetchAttendingEvents();
+    }, []);
 
-      {status && (
-        <Chip 
-          label={`${status} (${status === 'attending' ? '✓' : '✗'})`} 
-          color={status === 'attending' ? 'success' : status === 'maybe' ? 'warning' : 'error'}
-        />
-      )}
-    </Box>
-  );
+    return (
+        <Container maxWidth="md" sx={{ mt: 4 }}>
+            <Typography variant="h4" gutterBottom>
+                Events You're Attending
+            </Typography>
+
+            {loading && <CircularProgress />}
+            {error && <Alert severity="error">{error}</Alert>}
+
+            {!loading && !error && events.length === 0 && (
+                <Alert severity="info">You are not attending any events yet.</Alert>
+            )}
+
+            {events.map((event) => (
+                <Card key={event.id} sx={{ mb: 2 }}>
+                    <CardContent>
+                        
+                        <Typography variant="h6">{event.title}</Typography>
+                        
+                        <Typography variant="body2" color="textSecondary">
+                            {event.description}
+                        </Typography>
+                        <Typography variant="body2">
+                            <strong>Location:</strong> {event.location}
+                        </Typography>
+                        <Typography variant="body2">
+                            <strong>Venue:</strong> {event.venue}
+                        </Typography>
+                        <Typography variant="body2">
+                            <strong>Price:</strong> ${event.price}
+                        </Typography>
+                    </CardContent>
+                </Card>
+            ))}
+        </Container>
+    );
 };
 
-export default RSVPButton;
+export default AttendingEvents;
+
+
+
+
+
+
