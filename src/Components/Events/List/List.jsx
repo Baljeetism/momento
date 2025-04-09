@@ -40,15 +40,23 @@ const List = () => {
                     date: searchFilters.date
                 }
             });
-
-            setEvents(res.data.results);
-            setTotalPages(Math.ceil(res.data.count / eventsPerPage));
+    
+            // console.log("API Response:", res.data); 
+    
+            if (res.data.results) {
+                setEvents(res.data.results); 
+                setTotalPages(Math.ceil(res.data.count / eventsPerPage));
+            } else {
+                setEvents([]); 
+            }
         } catch (err) {
             console.error("Failed to fetch events:", err);
+            setEvents([]); 
         } finally {
             setLoading(false);
         }
     };
+    
 
     const checkAdmin = async () => {
         const adminStatus = await isAdminOnly();
