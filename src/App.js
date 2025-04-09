@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import SuperuserProtectedRoute from "./Utils/SuperuserProtectedRoute";
 import { publicRoutes,superuserProtected } from "./Routes";
 import Home from "./Components/Navbar/Home";
