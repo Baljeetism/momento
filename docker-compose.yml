@@ -1,0 +1,11 @@
+
+
+services:
+  frontend:
+    build: .
+    container_name: momento-update4
+    restart: always
+    ports:
+      - "3000:80"
+    volumes:
+    - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro

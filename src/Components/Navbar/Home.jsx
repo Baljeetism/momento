@@ -85,7 +85,6 @@ export default function Home() {
       </Box>
 
       <ReviewsPage />
-      <Button component={Link} to='/admin'>Admin Panel</Button>
       <Footer />
     </>
   );

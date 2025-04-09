@@ -19,8 +19,12 @@ RUN npm run build
 # Step 7: Use a lightweight Nginx server for serving the built app
 FROM nginx:alpine
 
+# COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
 # Step 8: Copy the build output to Nginx HTML directory
 COPY --from=builder /app/build /usr/share/nginx/html
+
+
 
 # Step 9: Expose port 80 to allow external access
 EXPOSE 80

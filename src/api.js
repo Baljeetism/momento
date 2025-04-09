@@ -1,5 +1,5 @@
+const BASE_URL = process.env.BASE_URL
 
-const BASE_URL = "http://localhost:8000/api";
 
 const API_ENDPOINTS = {
   BASE:`${BASE_URL}/`,
