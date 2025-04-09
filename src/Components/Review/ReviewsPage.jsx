@@ -6,36 +6,28 @@ import "../Styles/ReviewsCarousel.css";
 import API_ENDPOINTS from "../../api";
 
 const ReviewsPage = () => {
-    const [reviews, setReviews] = useState([]);  // Ensures it's always an array
+    const [reviews, setReviews] = useState([]);  
     const [fetching, setFetching] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        let isMounted = true; // Prevent state update on unmounted component
-
         const fetchReviews = async () => {
-            try {
-                setFetching(true);
-                setError(null);
+            setFetching(true);
+            setError(null);
 
+            try {
                 const response = await axios.get(API_ENDPOINTS.REVIEWS);
-                
-                if (isMounted) {
-                    setReviews(Array.isArray(response.data) ? response.data : []);
-                }
+                setReviews(Array.isArray(response.data) ? response.data : []); 
             } catch (err) {
                 console.error("Error fetching reviews:", err);
-                if (isMounted) {
-                    setError("Failed to load reviews. Please try again.");
-                }
+                setError("Failed to load reviews. Please try again.");
+                setReviews([]); 
             } finally {
-                if (isMounted) setFetching(false);
+                setFetching(false);
             }
         };
 
         fetchReviews();
-
-        return () => { isMounted = false; }; // Cleanup function
     }, []);
 
     return (
