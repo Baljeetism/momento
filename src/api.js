@@ -15,7 +15,7 @@ const API_ENDPOINTS = {
   EXPLORE_EVENTS: (id) => `${BASE_URL}/events/${id}/`,
   REVIEWS:`${BASE_URL}/reviews/reviews/`,
   USERID: (id) => `${BASE_URL}/auth/users/${id}/`,
-  EVENTS_BY_CREATOR: (creatorId) => `http://127.0.0.1:8000/api/events/?created_by=${creatorId}`
+  EVENTS_BY_CREATOR: (creatorId) => `${BASE_URL}/?created_by=${creatorId}`
   
 };
 
