@@ -1,6 +1,6 @@
-// const BASE_URL = process.env.BASE_URL
-const BASE_URL ="http://13.201.75.255:8000/api"
-// console.log("API_BASE_URL:", process.env.BASE_URL);
+// const BASE_URL = process.env.BASE_URL_REACT
+const BASE_URL ="https://13.201.75.255:8000/api"
+// console.log("API_BASE_URL:", BASE_URL);
 
 
 const API_ENDPOINTS = {
