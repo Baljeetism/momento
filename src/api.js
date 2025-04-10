@@ -1,4 +1,5 @@
 const BASE_URL = process.env.BASE_URL
+console.log("API_BASE_URL:", process.env.BASE_URL);
 
 
 const API_ENDPOINTS = {
