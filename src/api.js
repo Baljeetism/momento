@@ -1,7 +1,8 @@
-// const BASE_URL = process.env.BASE_URL_REACT
-const BASE_URL ="https://13.233.34.189/api"
-// console.log("API_BASE_URL:", BASE_URL);
+const BASE_URL = process.env.BASE_URL_REACT
+console.log("API_BASE_URL:", BASE_URL);
+console.log("ENV VARIABLES:", process.env);
 
+// const BASE_URL ="https://13.233.34.189/api"
 
 const API_ENDPOINTS = {
   BASE:`${BASE_URL}/`,

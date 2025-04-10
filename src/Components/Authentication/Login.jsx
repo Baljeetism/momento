@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {TextField,Button,Container,Typography,Card,CircularProgress,InputAdornment,IconButton,Grid,Box,} from "@mui/material";
+import {
+  TextField, Button, Container, Typography, Card,
+  CircularProgress, InputAdornment, IconButton, Grid, Box
+} from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Navbar from "../Navbar/Navbar";
@@ -15,7 +18,6 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) navigate("/");
@@ -30,13 +32,9 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
-   
-    e.preventDefault(); 
-    // setLoading(true);
+    e.preventDefault();
     try {
       const res = await axiosInstance.post(API_ENDPOINTS.LOGIN, credentials);
-      // console.log("Response:", res.data.data);
-
       localStorage.setItem("access_token", res.data.access);
       localStorage.setItem("refresh_token", res.data.refresh);
 
@@ -50,67 +48,53 @@ export default function Login() {
       navigate("/", { replace: true });
 
     } catch (err) {
-      // console.error("Login failed:", err.response.data);
-      // setLoading(false);
       Swal.fire({
         text: "Invalid credentials!",
         icon: "error",
         timer: 5000,
       });
-      // setTimeout(() => navigate("/"), 5000);
-    } finally {
-      // setLoading(false);
     }
   };
 
   return (
     <>
       <Navbar />
-      <Container
-        maxWidth="md"
-        sx={{ display: "flex", alignItems: "center", minHeight: "100vh" }}
-      >
-        <Grid container spacing={2} sx={{}}>
-          {/* Left Side — Branding & Quote */}
-          <Grid
-            item
-            xs={12}
-            md={6}
-            sx={{
-              backgroundColor: "#f8f9fa",
-              color: "#00171f",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              p: 4,
-
-            }}
-          >
-            <Typography variant="h3" sx={{ fontWeight: "bold", fontSize: "5rem" }}>
+      <Container maxWidth="lg" sx={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Grid container spacing={4} alignItems="center">
+          {/* Left Side - Branding */}
+          <Grid item xs={12} md={6} sx={{
+            backgroundColor: "#f8f9fa",
+            color: "#00171f",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            p: { xs: 2, md: 4 },
+          }}>
+            <Typography variant="h3" sx={{ fontWeight: "bold", fontSize: { xs: "3rem", md: "5rem" } }}>
               Momento
             </Typography>
-            <Typography variant="h6" sx={{ mt: 2, fontStyle: "italic", color: "#3A0CA3", fontFamily: "Outfit, sans-serif" }}>
+            <Typography variant="h6" sx={{
+              mt: 2,
+              fontStyle: "italic",
+              color: "#3A0CA3",
+              fontFamily: "Outfit, sans-serif",
+              fontSize: { xs: "1rem", md: "1.2rem" }
+            }}>
               "Every great event begins with a single login"
             </Typography>
           </Grid>
 
-          {/* Right Side — Login Form */}
-          <Grid item
-            xs={12}
-            md={6}
-            sx={{
-              backgroundColor: "#f8f9fa",
-              color: "#fff",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
+          {/* Right Side - Login Form */}
+          <Grid item xs={12} sm={10} md={6} display="flex" justifyContent="center">
+            <Card sx={{
               p: 4,
-
+              borderRadius: 2,
+              boxShadow: 5,
+              width: "100%",
+              maxWidth: 400
             }}>
-            <Card sx={{ p: 4, borderRadius: 2, boxShadow: 5 }}>
-
               <form onSubmit={handleSubmit}>
                 <TextField
                   fullWidth
@@ -148,7 +132,6 @@ export default function Login() {
                 <Button
                   type="submit"
                   variant="contained"
-                  color="primary"
                   fullWidth
                   sx={{
                     mt: 2, backgroundColor: "#38369a",
@@ -159,32 +142,30 @@ export default function Login() {
                 >
                   {loading ? <CircularProgress size={24} /> : "Login"}
                 </Button>
+
                 <Button
                   component={Link}
                   to="/reset"
                   variant="outlined"
-                  color="secondary"
                   fullWidth
                   sx={{ mt: 1, color: "#6096ba" }}
                 >
                   Forgotten password?
                 </Button>
+
                 <Button
                   component={Link}
                   to="/signup"
                   variant="contained"
-                  color="secondary"
                   fullWidth
                   sx={{
-                    mt: 5, backgroundColor: "#20bf55",
+                    mt: 3, backgroundColor: "#20bf55",
                     color: "#00072d",
                     "&:hover": { backgroundColor: "#6096ba" }
                   }}
                 >
                   Create New Account
                 </Button>
-
-
               </form>
             </Card>
           </Grid>
@@ -194,7 +175,3 @@ export default function Login() {
     </>
   );
 }
-
-
-
-
