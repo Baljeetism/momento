@@ -1,5 +1,5 @@
 // const BASE_URL = process.env.BASE_URL_REACT
-const BASE_URL ="http://13.201.75.255:8000/api"
+const BASE_URL ="https://13.233.34.189/api"
 // console.log("API_BASE_URL:", BASE_URL);
 
 
