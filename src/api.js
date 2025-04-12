@@ -3,7 +3,7 @@
 // console.log("ENV VARIABLES:", process.env);
 // const BASE_URL ="https://localhost:3000/#/api";
 
-const BASE_URL ="http://3.110.205.193:443/api"
+const BASE_URL ="https://3.110.205.193:443/api"
 console.log(BASE_URL);
 const API_ENDPOINTS = {
   BASE:`${BASE_URL}/`,
