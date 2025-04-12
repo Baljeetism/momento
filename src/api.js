@@ -3,8 +3,8 @@
 // console.log("ENV VARIABLES:", process.env);
 // const BASE_URL ="https://localhost:3000/#/api";
 
-const BASE_URL ="https://43.204.171.115/api"
-
+const BASE_URL ="https://65.2.82.110/api"
+console.log(BASE_URL);
 const API_ENDPOINTS = {
   BASE:`${BASE_URL}/`,
   EVENTSP: `${BASE_URL}/eventsz/`,
@@ -22,5 +22,6 @@ const API_ENDPOINTS = {
   EVENTS_BY_CREATOR: (creatorId) => `${BASE_URL}/?created_by=${creatorId}`
   
 };
+console.log(API_ENDPOINTS.REVIEWS);
 
 export default API_ENDPOINTS;
